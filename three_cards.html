@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>three buttons</title>
+    <style>
+      .hide{
+        display:none;
+      }
+    </style>
+    <script>
+      // random heart selector
+      var hearts = ["<3","<|3"];
+
+      function random_num_array(num){
+        var num_array = [];
+        for(i=0;i<num;i++){
+          // num will never appear in final array
+          num_array.push(num);
+        }
+        // ********* making a random number array ********** //
+        var count = 0;
+        while(num_array[num-1]==num){
+          var x = Math.floor(Math.random()*num);
+          // looping through current array
+          for(j=0;j<num;j++){
+            // if the element in num_array is already = x then we dont want to add it
+            // anywhere else
+            if(num_array[j]==x){
+              break;
+            }
+            // if the element in the num_array = num, it means we reach a new
+            // position and the value can be added
+            else if(num_array[j]==num){
+              num_array[j]=x;
+              break;
+            }
+          }
+        }
+        return num_array;
+      }
+
+      function heart_selector(){
+        var x=random_num_array(3);
+        // determines if person is evil or not
+        // 0 is heart, 1 is broken heart
+        var evilness = Math.floor(Math.random() * 2);
+        // add evilness to heart array
+        hearts.push(hearts[evilness]);
+        //var number_array = random_num_array();
+        //document.write(number_array[0]);
+        document.getElementById("value1").innerHTML = hearts[x[0]];
+        document.getElementById("value2").innerHTML = hearts[x[1]];
+        document.getElementById("value3").innerHTML = hearts[x[2]];
+      }
+
+
+      // reveal functions //
+      function reveal_hide(value){
+        var x = document.getElementById(value);
+        x.classList.toggle("hide");
+      }
+
+
+    </script>
+  </head>
+  <body onload="heart_selector()">
+    <button type="button" name="button1" onclick="reveal_hide('value1')">card 1</button>
+    <button type="button" name="button2" onclick="reveal_hide('value2')">card 2</button>
+    <button type="button" name="button3" onclick="reveal_hide('value3')">card 3</button>
+    <br>
+    <p class="hide" id="value1"></p>
+    <p class="hide" id="value2"></p>
+    <p class="hide" id="value3"></p>
+  </body>
+</html>
